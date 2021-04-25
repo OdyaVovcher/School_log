@@ -21,6 +21,6 @@ from log import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path("studentlist", views.studentlist),
+    path("studentslist", views.studentslist),
     path("addstudent", views.addstudent)
 ]
