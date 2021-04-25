@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path("studentslist", views.studentslist),
-    path("addstudent", views.addstudent)
+    path("addstudent", views.addstudent),
+    path("studentinfo/<int:id>", views.student_info),
 ]

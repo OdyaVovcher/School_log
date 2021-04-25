@@ -8,9 +8,13 @@
 <body>
 	<h1>Student Info</h1>
 
-	<p>Name: {{name}}</p>
-	<p>Email: {{email}}</p>
-	<p>Year: {{year}}</p>
+	<p>Name: {{student.name}}</p>
+	<p>Age: {{student.age}}</p>
+	<p>Email: {{student.email}}</p>
 
+	<form action="edit/{{student.id}}">
+		{% csrf_token %}
+		<input type="submit" value="Edit">
+	</form>
 </body>
 </html>
