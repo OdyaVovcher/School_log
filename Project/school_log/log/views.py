@@ -12,8 +12,9 @@ def studentslist(request):
 	students = Student.objects.all()
 	return render(request, "log/studentslist.html",{"students":students})
 
-def student_info(request):
-	return render(request, "log/shortcuts.html")
+def student_info(request,id):
+	student = Student.objects.get(id = id)
+	return render(request, "log/student_info.html",{"student":student})
 
 def addstudent(request):
 
@@ -24,10 +25,7 @@ def addstudent(request):
 		student.email = request.POST.get("email")
 
 		student.save()
-
-		data = {"name":student.name, "email": student.email, "age": student.age}
-
-		return render(request, "log/student_info.html", context = data)
+		return HttpResponseRedirect("/")
 	else:
 		addform = AddStudentForm()
 		return render(request,"log/addstudent.html", {"form":addform})
@@ -35,16 +33,15 @@ def addstudent(request):
 
 def edit(request, id):
 	try:
-		student = Student.objects,get(id = id)
+		student = Student.objects.get(id = id)
 
 		if request.method == "POST":
 			student.name = request.POST.get("name")
-			student.email = request.POST.get("email")
-			student.age = request.POST("age")
+			student.age = request.POST.get("age")
 			student.save()
 			return HttpResponseRedirect("/")
 		else:
-			return render(request, "edit.html", {"person": person})
+			return render(request, "log/edit.html", {"student": student})
 
 	except Student.DoesNotExist:
 		return HttpResponseNotFound("<h2>Student not found</h2>")

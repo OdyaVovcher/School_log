@@ -7,7 +7,6 @@
 </head>
 <body>
 	<form method = "POST">
-
 		{% csrf_token %}
 		<p>
 			<label> Input new name</label>
@@ -16,9 +15,13 @@
 		
 		<p>
 			<label>Input new date</label>
-			<input type="number" name = "age" value = "{{student.birth_date}}" />
+			<input type="number" name = "age" value = "{{student.age}}" />
 		</p>
 		<input type="submit" value="Save">
+	</form>
+	<br>
+	<form metod = "POST" action="delete/{{student.id}}">
+		<input type="Submit" value="Delete student">
 	</form>
 </body>
 </html>
