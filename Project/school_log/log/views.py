@@ -9,12 +9,13 @@ def index(request):
 	return render(request,"log/index.html")
 
 def studentslist(request):
-	students = Student.objects.all()
+	students = Student.objects.all().order_by('name')
 	return render(request, "log/studentslist.html",{"students":students})
 
 def student_info(request,id):
 	student = Student.objects.get(id = id)
-	return render(request, "log/student_info.html",{"student":student})
+	courses = student.courses.all()
+	return render(request, "log/student_info.html",{"student":student,"courses":courses})
 
 def addstudent(request):
 
@@ -23,6 +24,11 @@ def addstudent(request):
 		student.name = request.POST.get("name")
 		student.age = request.POST.get("age")
 		student.email = request.POST.get("email")
+		student.save()
+		subjects = request.POST.getlist("subjects")
+		for subject in subjects:
+			student.courses.create(name = subject)
+		student.save()
 		return HttpResponseRedirect("/")
 	else:
 		addform = AddStudentForm()

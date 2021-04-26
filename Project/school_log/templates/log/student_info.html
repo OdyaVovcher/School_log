@@ -12,6 +12,15 @@
 	<p>Age: {{student.age}}</p>
 	<p>Email: {{student.email}}</p>
 
+	<h2>Chosen courses:</h2>
+		<ul>
+			{% for course in courses %}
+				<li>{{course.name}}</li>
+			{% endfor %}
+		</ul>
+		
+	
+
 	<form action="edit/{{student.id}}">
 		{% csrf_token %}
 		<input type="submit" value="Edit">
