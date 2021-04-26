@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import AddStudentForm
 
-from .models import Student
+from .models import Student, Course
 # Create your views here.
 
 def index(request):
@@ -23,8 +23,6 @@ def addstudent(request):
 		student.name = request.POST.get("name")
 		student.age = request.POST.get("age")
 		student.email = request.POST.get("email")
-
-		student.save()
 		return HttpResponseRedirect("/")
 	else:
 		addform = AddStudentForm()
