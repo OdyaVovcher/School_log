@@ -58,3 +58,7 @@ def delete(request,id):
 		return HttpResponseRedirect("/")
 	except Student.DoesNotExist:
 		return HttpResponseNotFound("<h2>Student not found</h2>")
+
+def show_course_students(request,course_id = course_id):
+	course = Course.objects.get(id = course_id)
+	students = course.student_set
