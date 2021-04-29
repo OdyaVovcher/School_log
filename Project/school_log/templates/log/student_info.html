@@ -15,7 +15,7 @@
 	<h2>Chosen courses:</h2>
 		<ul>
 			{% for course in courses %}
-				<li>{{course.name}}</li>
+				<li><a href="course_student/{{course.name}}">{{course.name}}</a></li>
 			{% endfor %}
 		</ul>
 		

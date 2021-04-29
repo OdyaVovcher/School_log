@@ -8,6 +8,10 @@ from .models import Student, Course
 def index(request):
 	return render(request,"log/index.html")
 
+def courses(request):
+	courses = Course.objects.all()
+	return render(request,"log/courses.html", {"courses":courses})
+
 def studentslist(request):
 	students = Student.objects.all().order_by('name')
 	return render(request, "log/studentslist.html",{"students":students})
@@ -59,6 +63,7 @@ def delete(request,id):
 	except Student.DoesNotExist:
 		return HttpResponseNotFound("<h2>Student not found</h2>")
 
-def show_course_students(request,course_id = course_id):
-	course = Course.objects.get(id = course_id)
-	students = course.student_set
+def show_course_students(request, name):
+	course = Course.objects.filter(name = name)
+	students = Student.objects.filter(courses__name = name)
+	return render(request, "log/course_students.html",{"course":course,"students":students, "name":name})
