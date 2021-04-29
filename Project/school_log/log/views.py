@@ -31,8 +31,9 @@ def addstudent(request):
 		student.save()
 		subjects = request.POST.getlist("subjects")
 		for subject in subjects:
-			student.courses.create(name = subject)
-		student.save()
+			course, created = Course.objects.get_or_create(name = subject)
+			course.student_set.add(student)
+			course.save()
 		return HttpResponseRedirect("/")
 	else:
 		addform = AddStudentForm()
