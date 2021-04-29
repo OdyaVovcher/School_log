@@ -32,6 +32,8 @@ def addstudent(request):
 		subjects = request.POST.getlist("subjects")
 		for subject in subjects:
 			course, created = Course.objects.get_or_create(name = subject)
+			if created:
+				course.save()
 			course.student_set.add(student)
 			course.save()
 		return HttpResponseRedirect("/")
